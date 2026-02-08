@@ -40,32 +40,54 @@ Quantifies improvement using Sharpe ratio, accuracy, and convergence
 Visualizes results via an interactive Streamlit dashboard
 
 🧠 Solution Architecture
-Market Data (Yahoo Finance / Synthetic)
-            │
-            ▼
+
+OptiQ-Flow follows a dual-run quantum optimization pipeline designed to explicitly measure the impact of error mitigation on NISQ hardware:
+
+Market Data Ingestion
+
+Historical or synthetic market data (Yahoo Finance)
+
 Returns & Covariance Estimation
-            │
-            ▼
+
+Compute asset returns and covariance matrix
+
 QUBO / Ising Formulation
-            │
-            ├───────────────┐
-            ▼               ▼
-   QAOA (No Mitigation)   QAOA + Error Mitigation
-   ─ Raw readout          ─ Readout calibration
-   ─ Noisy gates          ─ ZNE / Richardson extrapolation
-            │               │
-            └───────┬───────┘
-                    ▼
-        Comparison & Evaluation
-        ─ Classical baseline (cvxpy)
-        ─ Sharpe ratio
-        ─ Accuracy
-        ─ Convergence
-                    │
-                    ▼
-        Interactive Visualization
-        ─ Streamlit dashboard
-        ─ Charts & heatmaps
+
+Convert the Markowitz mean–variance problem into a QUBO
+
+Map QUBO to an Ising Hamiltonian
+
+Quantum Optimization (Dual-Run Architecture)
+
+QAOA (No Mitigation)
+
+Raw readout
+
+Noisy gate execution
+
+QAOA + Error Mitigation
+
+Readout error calibration
+
+Zero-Noise Extrapolation (ZNE) / Richardson extrapolation
+
+Comparison & Evaluation
+
+Classical baseline using cvxpy
+
+Performance metrics:
+
+Sharpe ratio
+
+Accuracy
+
+Convergence behavior
+
+Interactive Visualization
+
+Streamlit dashboard
+
+Side-by-side charts and heatmaps
 
 🛠 Technology Stack
 | Layer              | Tools                    | Purpose                           |
