@@ -23,7 +23,233 @@ from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.converters import QuadraticProgramToQubo
 
 # ==========================================
-# 1. CONFIGURATION
+# TRADING TERMINAL STYLING
+# ==========================================
+def apply_trading_terminal_style():
+    st.markdown("""
+    <style>
+    /* Global Dark Theme */
+    .stApp {
+        background-color: #0E1117;
+        color: #FAFAFA;
+    }
+    
+    /* Header Bar */
+    .terminal-header {
+        background: linear-gradient(90deg, #1a1f2e 0%, #0f1419 100%);
+        padding: 15px 20px;
+        border-bottom: 2px solid #00ff88;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+    
+    .terminal-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #00ff88;
+        font-family: 'Courier New', monospace;
+        letter-spacing: 2px;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: monospace;
+        margin-left: 15px;
+    }
+    
+    .status-idle {
+        background-color: #404040;
+        color: #ffffff;
+    }
+    
+    .status-running {
+        background-color: #ff9500;
+        color: #000000;
+        animation: pulse 1.5s infinite;
+    }
+    
+    .status-done {
+        background-color: #00ff88;
+        color: #000000;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+    
+    /* Control Panel */
+    .control-panel {
+        background-color: #1a1f2e;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #2d3748;
+    }
+    
+    .control-section {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #2d3748;
+    }
+    
+    .control-label {
+        color: #00ff88;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    
+    /* Metrics Display */
+    .metric-card {
+        background: linear-gradient(135deg, #1a1f2e 0%, #0f1419 100%);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #00ff88;
+        margin: 10px 0;
+    }
+    
+    .metric-label {
+        font-size: 11px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .metric-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: #00ff88;
+        font-family: 'Courier New', monospace;
+    }
+    
+    .metric-value.negative {
+        color: #ff4444;
+    }
+    
+    .metric-delta {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    
+    .delta-positive {
+        color: #00ff88;
+    }
+    
+    .delta-negative {
+        color: #ff4444;
+    }
+    
+    /* Chart Container */
+    .chart-container {
+        background-color: #1a1f2e;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #2d3748;
+        margin: 10px 0;
+    }
+    
+    .chart-title {
+        color: #00ff88;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    /* Results Table */
+    .results-table {
+        background-color: #1a1f2e;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #2d3748;
+    }
+    
+    .results-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 20px;
+        border-bottom: 1px solid #2d3748;
+    }
+    
+    .results-row:hover {
+        background-color: #252c3d;
+    }
+    
+    .result-method {
+        color: #888;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .result-value {
+        color: #00ff88;
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
+    /* Buttons */
+    .stButton > button {
+        width: 100%;
+        background: linear-gradient(135deg, #00ff88 0%, #00cc6f 100%);
+        color: #000000;
+        font-weight: 700;
+        font-size: 16px;
+        padding: 15px;
+        border-radius: 8px;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #00cc6f 0%, #00ff88 100%);
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    }
+    
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #1a1f2e;
+        border-right: 2px solid #00ff88;
+    }
+    
+    /* Remove default padding */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    /* Info/Success boxes */
+    .stAlert {
+        background-color: #1a1f2e;
+        border: 1px solid #00ff88;
+        border-radius: 8px;
+    }
+    
+    /* Dataframe styling */
+    .dataframe {
+        background-color: #1a1f2e !important;
+        color: #FAFAFA !important;
+    }
+    
+    /* Input widgets */
+    .stMultiSelect, .stSlider, .stNumberInput, .stRadio {
+        background-color: #0E1117;
+    }
+    
+    </style>
+    """, unsafe_allow_html=True)
+
+# ==========================================
+# CONFIGURATION
 # ==========================================
 @dataclass
 class GlobalConfig:
@@ -45,7 +271,7 @@ class GlobalConfig:
 config = GlobalConfig()
 
 # ==========================================
-# 2. DATA LAYER
+# DATA LAYER
 # ==========================================
 def generate_synthetic_data(tickers: List[str], start_date: str, end_date: str) -> pd.DataFrame:
     dates = pd.date_range(start=start_date, end=end_date, freq='B')
@@ -73,7 +299,7 @@ def calculate_covariance_matrix(prices: pd.DataFrame) -> Tuple[np.ndarray, np.nd
     return mu, sigma
 
 # ==========================================
-# 3. QUBO FORMULATION
+# QUBO FORMULATION
 # ==========================================
 class PortfolioOptimizationQUBO:
     def __init__(self, mu: np.ndarray, sigma: np.ndarray, risk_aversion: float, budget: int):
@@ -104,13 +330,12 @@ class PortfolioOptimizationQUBO:
     def to_ising(self) -> Tuple[SparsePauliOp, float]:
         if self.qp is None:
             self.create_quadratic_program()
-        # Convert constraints to penalty terms
         conv = QuadraticProgramToQubo()
         qubo = conv.convert(self.qp)
         return qubo.to_ising()
 
 # ==========================================
-# 4. CLASSICAL SOLVER
+# CLASSICAL SOLVER
 # ==========================================
 @dataclass
 class ClassicalResult:
@@ -153,7 +378,7 @@ class ClassicalPortfolioSolver:
         return ClassicalResult(best_indices, bitstring, best_value, final_return, final_risk, sharpe)
 
 # ==========================================
-# 5. QUANTUM BACKEND
+# QUANTUM BACKEND
 # ==========================================
 def get_noisy_simulator():
     noise_model = NoiseModel()
@@ -176,7 +401,7 @@ def get_backend(use_real_backend: bool = False):
     return get_noisy_simulator()
 
 # ==========================================
-# 6. ERROR MITIGATION (ZNE + READOUT)
+# ERROR MITIGATION
 # ==========================================
 class ReadoutMitigator:
     def __init__(self, backend, num_qubits: int):
@@ -235,13 +460,11 @@ def global_folding(circuit: QuantumCircuit, scale: float) -> QuantumCircuit:
     k = int(round((max(1, scale) - 1) / 2))
     if k == 0: return circuit.copy()
     
-    # 1. Strip measurements to get unitary part
     unitary = QuantumCircuit(circuit.num_qubits)
     for instr in circuit.data:
         if instr.operation.name != "measure":
             unitary.append(instr.operation, instr.qubits, instr.clbits)
             
-    # 2. Fold unitary
     folded = unitary.copy()
     inv = unitary.inverse()
     for _ in range(k):
@@ -250,21 +473,17 @@ def global_folding(circuit: QuantumCircuit, scale: float) -> QuantumCircuit:
         folded.barrier()
         folded = folded.compose(unitary)
         
-    # 3. Re-append measurements (easy way: measure_all)
     folded.measure_all()
     return folded
 
 class ZNEMitigator:
     def __init__(self, scales): self.scales = scales
     def extrapolate(self, energies):
-        # Use numpy polyfit (degree 1) instead of sklearn
-        # y = mx + c. Value at x=0 is c.
-        # polyfit returns [m, c] for deg=1
         coeffs = np.polyfit(self.scales, energies, 1)
         return coeffs[1]
 
 # ==========================================
-# 7. QAOA EXECUTOR
+# QAOA EXECUTOR
 # ==========================================
 @dataclass
 class QAOAResult:
@@ -279,9 +498,6 @@ class RawQAOARunner:
         self.backend = backend
         self.reps = reps
         self.ansatz = QAOAAnsatz(cost_operator=hamiltonian, reps=reps)
-        # Use AerEstimator which takes run_options (shots, seed, etc.)
-        # and automatically uses the backend associated with it (or we pass it)
-        # For AerEstimator, we pass backend_options or run_options
         self.estimator = AerEstimator(run_options={"shots": config.SHOTS, "seed": config.SEED}, backend_options={"method": "density_matrix", "noise_model": backend.options.noise_model})
         self.history = []
 
@@ -338,66 +554,340 @@ class MitigatedExecutor:
         return E
 
 # ==========================================
-# 8. UI HELPERS
+# UI COMPONENTS
 # ==========================================
-def plot_results(c_val, raw, rem, zne):
+def render_header(status="IDLE", backend_type="Simulator"):
+    status_class = {
+        "IDLE": "status-idle",
+        "RUNNING": "status-running",
+        "DONE": "status-done"
+    }.get(status, "status-idle")
+    
+    st.markdown(f"""
+    <div class="terminal-header">
+        <span class="terminal-title">⚛️ OptiQ-Flow</span>
+        <span class="status-badge {status_class}">STATUS: {status}</span>
+        <span class="status-badge status-idle">BACKEND: {backend_type.upper()}</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+def render_metric_card(label, value, delta=None, is_positive=None):
+    value_class = "metric-value"
+    if delta is not None and is_positive is not None:
+        if not is_positive:
+            value_class += " negative"
+    
+    delta_html = ""
+    if delta is not None:
+        delta_class = "delta-positive" if is_positive else "delta-negative"
+        delta_symbol = "▲" if is_positive else "▼"
+        delta_html = f'<div class="metric-delta"><span class="{delta_class}">{delta_symbol} {abs(delta):.4f}</span></div>'
+    
+    st.markdown(f"""
+    <div class="metric-card">
+        <div class="metric-label">{label}</div>
+        <div class="{value_class}">{value:.6f}</div>
+        {delta_html}
+    </div>
+    """, unsafe_allow_html=True)
+
+def create_convergence_chart(history):
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(
+        x=list(range(len(history))),
+        y=history,
+        mode='lines+markers',
+        name='Energy',
+        line=dict(color='#00ff88', width=2),
+        marker=dict(size=6, color='#00ff88'),
+        fill='tozeroy',
+        fillcolor='rgba(0, 255, 136, 0.1)'
+    ))
+    
+    fig.update_layout(
+        title='QAOA Convergence',
+        title_font=dict(size=14, color='#00ff88', family='Courier New'),
+        xaxis_title='Iteration',
+        yaxis_title='Energy',
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#1a1f2e',
+        font=dict(color='#FAFAFA', family='Courier New'),
+        xaxis=dict(
+            gridcolor='#2d3748',
+            showgrid=True,
+            zeroline=False
+        ),
+        yaxis=dict(
+            gridcolor='#2d3748',
+            showgrid=True,
+            zeroline=False
+        ),
+        hovermode='x unified',
+        margin=dict(l=40, r=40, t=60, b=40)
+    )
+    
+    return fig
+
+def create_comparison_chart(c_val, raw, rem, zne):
+    methods = ['Classical', 'Raw QAOA', 'Readout Mit.', 'ZNE Mit.']
+    values = [c_val, raw, rem, zne]
+    colors = ['#00ff88', '#ff4444', '#ff9500', '#00ccff']
+    
     fig = go.Figure(data=[go.Bar(
-        x=['Classical', 'Raw QAOA', 'Readout Mit.', 'ZNE Mit.'],
-        y=[c_val, raw, rem, zne],
-        marker_color=['green', 'red', 'orange', 'blue']
+        x=methods,
+        y=values,
+        marker_color=colors,
+        text=[f'{v:.6f}' for v in values],
+        textposition='outside',
+        textfont=dict(color='#FAFAFA', family='Courier New', size=11)
     )])
-    fig.update_layout(title="Optimization Results (Energy)", yaxis_title="Energy")
+    
+    fig.update_layout(
+        title='Energy Comparison',
+        title_font=dict(size=14, color='#00ff88', family='Courier New'),
+        yaxis_title='Energy',
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#1a1f2e',
+        font=dict(color='#FAFAFA', family='Courier New'),
+        xaxis=dict(
+            gridcolor='#2d3748',
+            showgrid=False
+        ),
+        yaxis=dict(
+            gridcolor='#2d3748',
+            showgrid=True,
+            zeroline=False
+        ),
+        margin=dict(l=40, r=40, t=60, b=40),
+        showlegend=False
+    )
+    
     return fig
 
 # ==========================================
-# 9. MAIN APP
+# MAIN APP
 # ==========================================
 def main():
-    st.set_page_config(page_title="OptiQ-Flow", layout="wide")
-    st.title("OptiQ-Flow: All-in-One Quantum Portfolio Solver")
+    st.set_page_config(
+        page_title="OptiQ-Flow | Quantum Portfolio Optimization",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
     
+    apply_trading_terminal_style()
+    
+    # Session state initialization
+    if 'status' not in st.session_state:
+        st.session_state.status = "IDLE"
+    if 'results' not in st.session_state:
+        st.session_state.results = None
+    
+    # Sidebar Controls
     with st.sidebar:
-        st.header("Settings")
-        tickers = st.multiselect("Assets", ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"], default=["AAPL", "MSFT", "GOOGL", "AMZN"])
-        budget = st.number_input("Budget", 1, len(tickers), 2)
-        risk = st.slider("Risk Aversion", 0.0, 1.0, 0.5)
-        backend_type = st.radio("Backend", ["Simulator", "Real HW"])
-        run = st.button("RUN SOLVER")
-
-    if run:
-        st.info("Fetching Data...")
-        df = fetch_stock_data(tickers, config.START_DATE, config.END_DATE)
-        mu, sigma = calculate_covariance_matrix(df)
+        st.markdown('<div class="control-panel">', unsafe_allow_html=True)
         
-        st.info("Solving Classical Baseline...")
-        c_solver = ClassicalPortfolioSolver(mu, sigma, risk, budget)
-        c_res = c_solver.solve()
+        st.markdown('<div class="control-section">', unsafe_allow_html=True)
+        st.markdown('<div class="control-label">Asset Selection</div>', unsafe_allow_html=True)
+        tickers = st.multiselect(
+            "Select Assets",
+            ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META", "NFLX"],
+            default=["AAPL", "MSFT", "GOOGL", "AMZN"],
+            label_visibility="collapsed"
+        )
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        st.info("Running Quantum Optimization...")
-        qubo = PortfolioOptimizationQUBO(mu, sigma, risk, budget)
-        op, _ = qubo.to_ising()
+        st.markdown('<div class="control-section">', unsafe_allow_html=True)
+        st.markdown('<div class="control-label">Portfolio Parameters</div>', unsafe_allow_html=True)
+        budget = st.number_input("Assets to Select", 1, len(tickers) if tickers else 4, 2)
+        risk = st.slider("Risk Aversion λ", 0.0, 1.0, 0.5, 0.05)
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        backend = get_backend(backend_type == "Real HW")
+        st.markdown('<div class="control-section">', unsafe_allow_html=True)
+        st.markdown('<div class="control-label">Quantum Backend</div>', unsafe_allow_html=True)
+        backend_type = st.radio(
+            "Backend Type",
+            ["Simulator", "Real Hardware"],
+            label_visibility="collapsed"
+        )
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # QAOA
-        runner = RawQAOARunner(op, backend)
-        q_res = runner.run()
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        # Mitigation
-        mitigator = MitigatedExecutor(backend, op)
-        m_res = mitigator.execute(q_res.circuit)
+        st.markdown("<br>", unsafe_allow_html=True)
+        run_solver = st.button("🚀 EXECUTE SOLVER")
+    
+    # Header
+    backend_display = "SIMULATOR" if backend_type == "Simulator" else "IBM QUANTUM"
+    render_header(st.session_state.status, backend_display)
+    
+    # Main execution
+    if run_solver and tickers:
+        st.session_state.status = "RUNNING"
+        render_header(st.session_state.status, backend_display)
         
-        # Results
-        st.success("Done!")
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Classical", f"{c_res.value:.4f}")
-            st.metric("Raw QAOA", f"{m_res['raw']:.4f}")
-        with col2:
-            st.metric("ZNE Mitigated", f"{m_res['zne']:.4f}")
+        progress_container = st.empty()
+        
+        # Step 1: Data Fetch
+        with progress_container.container():
+            with st.spinner("📊 Fetching market data..."):
+                df = fetch_stock_data(tickers, config.START_DATE, config.END_DATE)
+                mu, sigma = calculate_covariance_matrix(df)
+        
+        # Step 2: Classical Solver
+        with progress_container.container():
+            with st.spinner("⚙️ Running classical optimization..."):
+                c_solver = ClassicalPortfolioSolver(mu, sigma, risk, budget)
+                c_res = c_solver.solve()
+        
+        # Step 3: Quantum Setup
+        with progress_container.container():
+            with st.spinner("🔬 Initializing quantum circuit..."):
+                qubo = PortfolioOptimizationQUBO(mu, sigma, risk, budget)
+                op, _ = qubo.to_ising()
+                backend = get_backend(backend_type == "Real Hardware")
+        
+        # Step 4: QAOA Execution
+        with progress_container.container():
+            with st.spinner("⚛️ Executing QAOA optimization..."):
+                runner = RawQAOARunner(op, backend)
+                q_res = runner.run()
+        
+        # Step 5: Error Mitigation
+        with progress_container.container():
+            with st.spinner("🛡️ Applying error mitigation..."):
+                mitigator = MitigatedExecutor(backend, op)
+                m_res = mitigator.execute(q_res.circuit)
+        
+        progress_container.empty()
+        
+        # Store results
+        st.session_state.results = {
+            'classical': c_res,
+            'qaoa': q_res,
+            'mitigated': m_res,
+            'tickers': tickers
+        }
+        st.session_state.status = "DONE"
+        st.rerun()
+    
+    # Display Results
+    if st.session_state.results:
+        results = st.session_state.results
+        c_res = results['classical']
+        q_res = results['qaoa']
+        m_res = results['mitigated']
+        selected_tickers = results['tickers']
+        
+        # Main content area
+        col_main, col_side = st.columns([7, 3])
+        
+        with col_main:
+            # Convergence Chart
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">📈 QAOA Energy Convergence</div>', unsafe_allow_html=True)
+            st.plotly_chart(create_convergence_chart(q_res.history), use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
             
-        st.plotly_chart(plot_results(c_res.value, m_res['raw'], m_res['rem'], m_res['zne']))
-        st.line_chart(q_res.history)
+            # Comparison Chart
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">⚖️ Method Comparison</div>', unsafe_allow_html=True)
+            st.plotly_chart(
+                create_comparison_chart(c_res.value, m_res['raw'], m_res['rem'], m_res['zne']),
+                use_container_width=True
+            )
+            st.markdown('</div>', unsafe_allow_html=True)
+        
+        with col_side:
+            # Energy Metrics
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">⚡ ENERGY METRICS</div>', unsafe_allow_html=True)
+            
+            render_metric_card("Classical Baseline", c_res.value)
+            
+            raw_improvement = c_res.value < m_res['raw']
+            raw_delta = m_res['raw'] - c_res.value
+            render_metric_card("Raw QAOA", m_res['raw'], raw_delta, not raw_improvement)
+            
+            rem_improvement = c_res.value < m_res['rem']
+            rem_delta = m_res['rem'] - c_res.value
+            render_metric_card("Readout Mitigated", m_res['rem'], rem_delta, not rem_improvement)
+            
+            zne_improvement = c_res.value < m_res['zne']
+            zne_delta = m_res['zne'] - c_res.value
+            render_metric_card("ZNE Mitigated", m_res['zne'], zne_delta, not zne_improvement)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Portfolio Allocation
+            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+            st.markdown('<div class="chart-title">📊 OPTIMAL PORTFOLIO</div>', unsafe_allow_html=True)
+            
+            selected_assets = [selected_tickers[i] for i in c_res.indices]
+            portfolio_df = pd.DataFrame({
+                'Asset': selected_assets,
+                'Weight': [1/len(selected_assets)] * len(selected_assets)
+            })
+            
+            st.dataframe(
+                portfolio_df.style.format({'Weight': '{:.2%}'}),
+                use_container_width=True,
+                hide_index=True
+            )
+            
+            st.markdown(f"""
+            <div style="margin-top: 15px; padding: 10px; background-color: #0E1117; border-radius: 4px;">
+                <div style="color: #888; font-size: 11px;">SHARPE RATIO</div>
+                <div style="color: #00ff88; font-size: 20px; font-family: 'Courier New', monospace; font-weight: 700;">
+                    {c_res.sharpe:.4f}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Bottom Results Summary
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+        st.markdown('<div class="chart-title">📋 DETAILED RESULTS</div>', unsafe_allow_html=True)
+        
+        summary_df = pd.DataFrame({
+            'Method': ['Classical', 'Raw QAOA', 'Readout Mitigation', 'ZNE Mitigation'],
+            'Energy': [c_res.value, m_res['raw'], m_res['rem'], m_res['zne']],
+            'Delta vs Classical': [0.0, m_res['raw'] - c_res.value, m_res['rem'] - c_res.value, m_res['zne'] - c_res.value],
+            'Improvement': ['Baseline', 
+                           '✓' if m_res['raw'] < c_res.value else '✗',
+                           '✓' if m_res['rem'] < c_res.value else '✗',
+                           '✓' if m_res['zne'] < c_res.value else '✗']
+        })
+        
+        st.dataframe(
+            summary_df.style.format({
+                'Energy': '{:.6f}',
+                'Delta vs Classical': '{:+.6f}'
+            }),
+            use_container_width=True,
+            hide_index=True
+        )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    elif st.session_state.status == "IDLE":
+        # Welcome screen
+        st.markdown("""
+        <div style="text-align: center; padding: 60px 20px;">
+            <h1 style="color: #00ff88; font-size: 48px; font-family: 'Courier New', monospace;">
+                ⚛️ OptiQ-Flow
+            </h1>
+            <p style="color: #888; font-size: 18px; margin-top: 20px;">
+                Quantum-Enhanced Portfolio Optimization Platform
+            </p>
+            <p style="color: #FAFAFA; font-size: 14px; margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Configure your portfolio parameters in the sidebar and click <strong style="color: #00ff88;">EXECUTE SOLVER</strong> 
+                to run quantum optimization with advanced error mitigation techniques.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
