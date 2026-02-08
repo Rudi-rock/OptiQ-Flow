@@ -40,55 +40,27 @@ Quantifies improvement using Sharpe ratio, accuracy, and convergence
 Visualizes results via an interactive Streamlit dashboard
 
 🧠 Solution Architecture
+| Stage | Component                | Description                                                            |
+| ----- | ------------------------ | ---------------------------------------------------------------------- |
+| 1     | Market Data              | Historical or synthetic asset prices from Yahoo Finance                |
+| 2     | Returns & Covariance     | Compute asset returns and covariance matrix                            |
+| 3     | QUBO / Ising Formulation | Map Markowitz mean–variance optimization to QUBO and Ising Hamiltonian |
+| 4     | QAOA (No Mitigation)     | Raw quantum execution with noisy gates and uncorrected readout         |
+| 5     | QAOA + Error Mitigation  | Readout error calibration and Zero-Noise / Richardson extrapolation    |
+| 6     | Comparison & Evaluation  | Compare quantum results against classical baseline (cvxpy)             |
+| 7     | Metrics                  | Sharpe ratio, accuracy, and convergence analysis                       |
+| 8     | Visualization            | Interactive Streamlit dashboard with charts and heatmaps               |
 
-OptiQ-Flow follows a dual-run quantum optimization pipeline designed to explicitly measure the impact of error mitigation on NISQ hardware:
+Key Takeaway
 
-Market Data Ingestion
+| Aspect            | Outcome                                           |
+| ----------------- | ------------------------------------------------- |
+| Dual-run design   | Explicit before/after error mitigation comparison |
+| Hardware focus    | Runs on real NISQ quantum devices                 |
+| Measurable impact | Quantified improvement in optimization accuracy   |
+| Usability         | Clear visualization for analysis and demos        |
 
-Historical or synthetic market data (Yahoo Finance)
-
-Returns & Covariance Estimation
-
-Compute asset returns and covariance matrix
-
-QUBO / Ising Formulation
-
-Convert the Markowitz mean–variance problem into a QUBO
-
-Map QUBO to an Ising Hamiltonian
-
-Quantum Optimization (Dual-Run Architecture)
-
-QAOA (No Mitigation)
-
-Raw readout
-
-Noisy gate execution
-
-QAOA + Error Mitigation
-
-Readout error calibration
-
-Zero-Noise Extrapolation (ZNE) / Richardson extrapolation
-
-Comparison & Evaluation
-
-Classical baseline using cvxpy
-
-Performance metrics:
-
-Sharpe ratio
-
-Accuracy
-
-Convergence behavior
-
-Interactive Visualization
-
-Streamlit dashboard
-
-Side-by-side charts and heatmaps
-
+ 
 🛠 Technology Stack
 | Layer              | Tools                    | Purpose                           |
 | ------------------ | ------------------------ | --------------------------------- |
