@@ -40,40 +40,45 @@ Quantifies improvement using Sharpe ratio, accuracy, and convergence
 Visualizes results via an interactive Streamlit dashboard
 
 🧠 Solution Architecture
-┌──────────────────────────────────────────────────────────────────┐
-│                        OptiQ-Flow Pipeline                        │
-│                                                                  │
-│  ┌────────────┐   ┌──────────────┐   ┌───────────────────────┐  │
-│  │ Yahoo Fin  │──▶│ Returns &    │──▶│ QUBO / Ising          │  │
-│  │ / Synthetic│   │ Covariance   │   │ Formulation           │  │
-│  └────────────┘   └──────────────┘   └───────────┬───────────┘  │
-│                                                   │              │
-│                     ┌─────────────────────────────┤              │
-│                     ▼                             ▼              │
-│          ┌───────────────────┐     ┌────────────────────────┐  │
-│          │ QAOA (no mitigation)│     │ QAOA + Error Mitigation│  │
-│          │ - Raw readout      │     │ - Readout calibration  │  │
-│          │ - Noisy gates      │     │ - ZNE / Richardson     │  │
-│          └──────────┬────────┘     └──────────┬─────────────┘  │
-│                     ▼                          ▼               │
-│          ┌──────────────────────────────────────────────────┐  │
-│          │ Comparison & Visualization                         │  │
-│          │ - Classical baseline (cvxpy)                       │  │
-│          │ - Sharpe ratio, accuracy, convergence               │  │
-│          │ - Streamlit dashboard                               │  │
-│          └──────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────────┘
+Market Data (Yahoo Finance / Synthetic)
+            │
+            ▼
+Returns & Covariance Estimation
+            │
+            ▼
+QUBO / Ising Formulation
+            │
+            ├───────────────┐
+            ▼               ▼
+   QAOA (No Mitigation)   QAOA + Error Mitigation
+   ─ Raw readout          ─ Readout calibration
+   ─ Noisy gates          ─ ZNE / Richardson extrapolation
+            │               │
+            └───────┬───────┘
+                    ▼
+        Comparison & Evaluation
+        ─ Classical baseline (cvxpy)
+        ─ Sharpe ratio
+        ─ Accuracy
+        ─ Convergence
+                    │
+                    ▼
+        Interactive Visualization
+        ─ Streamlit dashboard
+        ─ Charts & heatmaps
 
 🛠 Technology Stack
-Layer	Tools	Purpose
-Quantum SDK	Qiskit 1.x, IBM Runtime	Circuits, transpilation, hardware
-Simulator	Qiskit Aer	Noisy & noiseless simulation
-Optimization	COBYLA, SLSQP	Classical QAOA optimization
-Classical Baseline	cvxpy	Markowitz solver
-Data	yfinance, pandas, NumPy	Market data & statistics
-Visualization	Plotly, Matplotlib	Charts & heatmaps
-Dashboard	Streamlit	Interactive UI
-Error Mitigation	Readout calibration, ZNE	Noise reduction
+| Layer              | Tools                    | Purpose                           |
+| ------------------ | ------------------------ | --------------------------------- |
+| Quantum SDK        | Qiskit 1.x, IBM Runtime  | Circuits, transpilation, hardware |
+| Simulator          | Qiskit Aer               | Noisy & noiseless simulation      |
+| Optimization       | COBYLA, SLSQP            | Classical QAOA optimization       |
+| Classical Baseline | cvxpy                    | Markowitz solver                  |
+| Data               | yfinance, pandas, NumPy  | Market data & statistics          |
+| Visualization      | Plotly, Matplotlib       | Charts & heatmaps                 |
+| Dashboard          | Streamlit                | Interactive UI                    |
+| Error Mitigation   | Readout calibration, ZNE | Noise reduction                   |
+
 📦 Installation
 git clone https://github.com/your-org/optiq-flow.git
 cd optiq-flow
