@@ -23,277 +23,7 @@ from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.converters import QuadraticProgramToQubo
 
 # ==========================================
-# COINDCX-STYLE THEME
-# ==========================================
-def apply_coindcx_theme():
-    st.markdown("""
-    <style>
-    /* Global Dark Theme */
-    .stApp {
-        background-color: #0b0b0b;
-        color: #e8e8e8;
-    }
-    
-    /* Remove default padding */
-    .block-container {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        max-width: 100%;
-    }
-    
-    /* Header Tabs */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 0px;
-        background-color: #0b0b0b;
-        padding: 0;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background-color: #0b0b0b;
-        color: #888;
-        font-size: 16px;
-        font-weight: 600;
-        padding: 12px 24px;
-        border: none;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background-color: #0b0b0b;
-        color: #4d9cff;
-        border-bottom: 3px solid #4d9cff;
-    }
-    
-    /* Card Containers */
-    .category-card {
-        background-color: #1a1a1a;
-        border-radius: 16px;
-        padding: 20px;
-        margin: 12px 0;
-    }
-    
-    .category-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #2a2a2a;
-    }
-    
-    .category-icon {
-        width: 40px;
-        height: 40px;
-        background-color: #2a2a2a;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        margin-right: 12px;
-    }
-    
-    .category-title {
-        flex: 1;
-        font-size: 18px;
-        font-weight: 700;
-        color: #e8e8e8;
-    }
-    
-    .category-subtitle {
-        font-size: 13px;
-        color: #888;
-        margin-top: 2px;
-    }
-    
-    .category-arrow {
-        color: #888;
-        font-size: 20px;
-    }
-    
-    /* Asset List Items */
-    .asset-item {
-        display: flex;
-        align-items: center;
-        padding: 14px 0;
-        border-bottom: 1px solid #2a2a2a;
-    }
-    
-    .asset-item:last-child {
-        border-bottom: none;
-    }
-    
-    .asset-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        font-weight: 700;
-        margin-right: 14px;
-        color: #4d9cff;
-    }
-    
-    .asset-info {
-        flex: 1;
-    }
-    
-    .asset-name {
-        font-size: 16px;
-        font-weight: 600;
-        color: #e8e8e8;
-        margin-bottom: 2px;
-    }
-    
-    .asset-symbol {
-        font-size: 13px;
-        color: #888;
-    }
-    
-    .asset-price {
-        text-align: right;
-    }
-    
-    .asset-value {
-        font-size: 16px;
-        font-weight: 700;
-        color: #e8e8e8;
-        margin-bottom: 2px;
-    }
-    
-    .asset-change {
-        font-size: 14px;
-        font-weight: 600;
-    }
-    
-    .gain {
-        color: #00d563;
-    }
-    
-    .loss {
-        color: #ff4d4d;
-    }
-    
-    /* Control Panel */
-    .control-panel {
-        background-color: #1a1a1a;
-        border-radius: 16px;
-        padding: 20px;
-        margin: 12px 0;
-    }
-    
-    .control-section {
-        margin-bottom: 20px;
-    }
-    
-    .control-label {
-        color: #888;
-        font-size: 13px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-    }
-    
-    /* Buttons */
-    .stButton > button {
-        width: 100%;
-        background: linear-gradient(135deg, #4d9cff 0%, #3d7fcf 100%);
-        color: #ffffff;
-        font-weight: 700;
-        font-size: 16px;
-        padding: 14px;
-        border-radius: 12px;
-        border: none;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    .stButton > button:hover {
-        background: linear-gradient(135deg, #5da9ff 0%, #4d8fdf 100%);
-        box-shadow: 0 4px 12px rgba(77, 156, 255, 0.3);
-    }
-    
-    /* Metrics */
-    .metric-container {
-        background-color: #1a1a1a;
-        border-radius: 12px;
-        padding: 16px;
-        margin: 8px 0;
-    }
-    
-    .metric-label {
-        font-size: 12px;
-        color: #888;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 6px;
-    }
-    
-    .metric-value {
-        font-size: 22px;
-        font-weight: 700;
-        font-family: monospace;
-    }
-    
-    .metric-delta {
-        font-size: 14px;
-        font-weight: 600;
-        margin-top: 4px;
-    }
-    
-    /* Sidebar */
-    [data-testid="stSidebar"] {
-        background-color: #0f0f0f;
-        border-right: 1px solid #2a2a2a;
-    }
-    
-    [data-testid="stSidebar"] > div {
-        background-color: #0f0f0f;
-    }
-    
-    /* Input widgets */
-    .stMultiSelect, .stSlider, .stNumberInput, .stRadio {
-        background-color: #1a1a1a;
-    }
-    
-    /* Tabs content area */
-    .stTabs [data-baseweb="tab-panel"] {
-        padding-top: 20px;
-    }
-    
-    /* Charts */
-    .chart-container {
-        background-color: #1a1a1a;
-        border-radius: 16px;
-        padding: 20px;
-        margin: 12px 0;
-    }
-    
-    /* Info boxes */
-    .stAlert {
-        background-color: #1a1a1a;
-        border: 1px solid #2a2a2a;
-        border-radius: 12px;
-        color: #e8e8e8;
-    }
-    
-    /* Expander */
-    .streamlit-expanderHeader {
-        background-color: #1a1a1a;
-        border-radius: 12px;
-    }
-    
-    /* Hide Streamlit branding */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    
-    </style>
-    """, unsafe_allow_html=True)
-
-# ==========================================
-# CONFIGURATION
+# 1. CONFIGURATION
 # ==========================================
 @dataclass
 class GlobalConfig:
@@ -315,7 +45,7 @@ class GlobalConfig:
 config = GlobalConfig()
 
 # ==========================================
-# DATA LAYER
+# 2. DATA LAYER
 # ==========================================
 def generate_synthetic_data(tickers: List[str], start_date: str, end_date: str) -> pd.DataFrame:
     dates = pd.date_range(start=start_date, end=end_date, freq='B')
@@ -343,7 +73,7 @@ def calculate_covariance_matrix(prices: pd.DataFrame) -> Tuple[np.ndarray, np.nd
     return mu, sigma
 
 # ==========================================
-# QUBO FORMULATION
+# 3. QUBO FORMULATION
 # ==========================================
 class PortfolioOptimizationQUBO:
     def __init__(self, mu: np.ndarray, sigma: np.ndarray, risk_aversion: float, budget: int):
@@ -374,12 +104,13 @@ class PortfolioOptimizationQUBO:
     def to_ising(self) -> Tuple[SparsePauliOp, float]:
         if self.qp is None:
             self.create_quadratic_program()
+        # Convert constraints to penalty terms
         conv = QuadraticProgramToQubo()
         qubo = conv.convert(self.qp)
         return qubo.to_ising()
 
 # ==========================================
-# CLASSICAL SOLVER
+# 4. CLASSICAL SOLVER
 # ==========================================
 @dataclass
 class ClassicalResult:
@@ -422,7 +153,7 @@ class ClassicalPortfolioSolver:
         return ClassicalResult(best_indices, bitstring, best_value, final_return, final_risk, sharpe)
 
 # ==========================================
-# QUANTUM BACKEND
+# 5. QUANTUM BACKEND
 # ==========================================
 def get_noisy_simulator():
     noise_model = NoiseModel()
@@ -445,7 +176,7 @@ def get_backend(use_real_backend: bool = False):
     return get_noisy_simulator()
 
 # ==========================================
-# ERROR MITIGATION
+# 6. ERROR MITIGATION (ZNE + READOUT)
 # ==========================================
 class ReadoutMitigator:
     def __init__(self, backend, num_qubits: int):
@@ -504,11 +235,13 @@ def global_folding(circuit: QuantumCircuit, scale: float) -> QuantumCircuit:
     k = int(round((max(1, scale) - 1) / 2))
     if k == 0: return circuit.copy()
     
+    # 1. Strip measurements to get unitary part
     unitary = QuantumCircuit(circuit.num_qubits)
     for instr in circuit.data:
         if instr.operation.name != "measure":
             unitary.append(instr.operation, instr.qubits, instr.clbits)
             
+    # 2. Fold unitary
     folded = unitary.copy()
     inv = unitary.inverse()
     for _ in range(k):
@@ -517,17 +250,21 @@ def global_folding(circuit: QuantumCircuit, scale: float) -> QuantumCircuit:
         folded.barrier()
         folded = folded.compose(unitary)
         
+    # 3. Re-append measurements (easy way: measure_all)
     folded.measure_all()
     return folded
 
 class ZNEMitigator:
     def __init__(self, scales): self.scales = scales
     def extrapolate(self, energies):
+        # Use numpy polyfit (degree 1) instead of sklearn
+        # y = mx + c. Value at x=0 is c.
+        # polyfit returns [m, c] for deg=1
         coeffs = np.polyfit(self.scales, energies, 1)
         return coeffs[1]
 
 # ==========================================
-# QAOA EXECUTOR
+# 7. QAOA EXECUTOR
 # ==========================================
 @dataclass
 class QAOAResult:
@@ -542,6 +279,9 @@ class RawQAOARunner:
         self.backend = backend
         self.reps = reps
         self.ansatz = QAOAAnsatz(cost_operator=hamiltonian, reps=reps)
+        # Use AerEstimator which takes run_options (shots, seed, etc.)
+        # and automatically uses the backend associated with it (or we pass it)
+        # For AerEstimator, we pass backend_options or run_options
         self.estimator = AerEstimator(run_options={"shots": config.SHOTS, "seed": config.SEED}, backend_options={"method": "density_matrix", "noise_model": backend.options.noise_model})
         self.history = []
 
@@ -598,463 +338,66 @@ class MitigatedExecutor:
         return E
 
 # ==========================================
-# UI COMPONENTS
+# 8. UI HELPERS
 # ==========================================
-def render_asset_item(symbol, name, value, change_pct, is_gain):
-    """Render individual asset item in CoinDCX list style"""
-    change_class = "gain" if is_gain else "loss"
-    change_symbol = "+" if is_gain else ""
-    
-    # Get first 2 letters for icon
-    icon_text = symbol[:2].upper()
-    
-    st.markdown(f"""
-    <div class="asset-item">
-        <div class="asset-icon">{icon_text}</div>
-        <div class="asset-info">
-            <div class="asset-name">{name}</div>
-            <div class="asset-symbol">{symbol}</div>
-        </div>
-        <div class="asset-price">
-            <div class="asset-value">{value}</div>
-            <div class="asset-change {change_class}">{change_symbol}{change_pct:.2f}%</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-def create_energy_chart(history):
-    """Create QAOA convergence chart"""
-    fig = go.Figure()
-    
-    fig.add_trace(go.Scatter(
-        x=list(range(len(history))),
-        y=history,
-        mode='lines+markers',
-        name='Energy',
-        line=dict(color='#4d9cff', width=2),
-        marker=dict(size=5, color='#4d9cff'),
-        fill='tozeroy',
-        fillcolor='rgba(77, 156, 255, 0.1)'
-    ))
-    
-    fig.update_layout(
-        title='QAOA Energy Convergence',
-        title_font=dict(size=14, color='#e8e8e8'),
-        xaxis_title='Iteration',
-        yaxis_title='Energy',
-        plot_bgcolor='#0b0b0b',
-        paper_bgcolor='#1a1a1a',
-        font=dict(color='#e8e8e8'),
-        xaxis=dict(gridcolor='#2a2a2a', showgrid=True, zeroline=False),
-        yaxis=dict(gridcolor='#2a2a2a', showgrid=True, zeroline=False),
-        hovermode='x unified',
-        margin=dict(l=40, r=40, t=60, b=40)
-    )
-    
-    return fig
-
-def create_comparison_chart(c_val, raw, rem, zne):
-    """Create method comparison chart"""
-    methods = ['Classical', 'Raw QAOA', 'Readout Mit.', 'ZNE Mit.']
-    values = [c_val, raw, rem, zne]
-    
-    # Color based on improvement
-    colors = []
-    for v in values:
-        if v < c_val:
-            colors.append('#00d563')
-        elif v > c_val:
-            colors.append('#ff4d4d')
-        else:
-            colors.append('#888888')
-    colors[0] = '#4d9cff'  # Classical baseline
-    
+def plot_results(c_val, raw, rem, zne):
     fig = go.Figure(data=[go.Bar(
-        x=methods,
-        y=values,
-        marker_color=colors,
-        text=[f'{v:.6f}' for v in values],
-        textposition='outside',
-        textfont=dict(color='#e8e8e8', size=11)
+        x=['Classical', 'Raw QAOA', 'Readout Mit.', 'ZNE Mit.'],
+        y=[c_val, raw, rem, zne],
+        marker_color=['green', 'red', 'orange', 'blue']
     )])
-    
-    fig.update_layout(
-        title='Method Comparison',
-        title_font=dict(size=14, color='#e8e8e8'),
-        yaxis_title='Energy',
-        plot_bgcolor='#0b0b0b',
-        paper_bgcolor='#1a1a1a',
-        font=dict(color='#e8e8e8'),
-        xaxis=dict(gridcolor='#2a2a2a', showgrid=False),
-        yaxis=dict(gridcolor='#2a2a2a', showgrid=True, zeroline=False),
-        margin=dict(l=40, r=40, t=60, b=40),
-        showlegend=False
-    )
-    
+    fig.update_layout(title="Optimization Results (Energy)", yaxis_title="Energy")
     return fig
 
 # ==========================================
-# MAIN APP
+# 9. MAIN APP
 # ==========================================
 def main():
-    st.set_page_config(
-        page_title="OptiQ-Flow",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
+    st.set_page_config(page_title="OptiQ-Flow", layout="wide")
+    st.title("OptiQ-Flow: All-in-One Quantum Portfolio Solver")
     
-    apply_coindcx_theme()
-    
-    # Session state
-    if 'status' not in st.session_state:
-        st.session_state.status = "idle"
-    if 'results' not in st.session_state:
-        st.session_state.results = None
-    
-    # Title
-    st.markdown('<h1 style="color: #e8e8e8; font-size: 28px; margin-bottom: 10px;">⚛️ OptiQ-Flow</h1>', unsafe_allow_html=True)
-    
-    # Tabs
-    tab1, tab2, tab3 = st.tabs(["Overview", "Categories", "Results"])
-    
-    # Sidebar Controls
     with st.sidebar:
-        st.markdown('<div class="control-panel">', unsafe_allow_html=True)
+        st.header("Settings")
+        tickers = st.multiselect("Assets", ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"], default=["AAPL", "MSFT", "GOOGL", "AMZN"])
+        budget = st.number_input("Budget", 1, len(tickers), 2)
+        risk = st.slider("Risk Aversion", 0.0, 1.0, 0.5)
+        backend_type = st.radio("Backend", ["Simulator", "Real HW"])
+        run = st.button("RUN SOLVER")
+
+    if run:
+        st.info("Fetching Data...")
+        df = fetch_stock_data(tickers, config.START_DATE, config.END_DATE)
+        mu, sigma = calculate_covariance_matrix(df)
         
-        st.markdown('<div class="control-section">', unsafe_allow_html=True)
-        st.markdown('<div class="control-label">Asset Selection</div>', unsafe_allow_html=True)
-        tickers = st.multiselect(
-            "Select Assets",
-            ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "NVDA", "META", "NFLX"],
-            default=["AAPL", "MSFT", "GOOGL", "AMZN"],
-            label_visibility="collapsed"
-        )
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.info("Solving Classical Baseline...")
+        c_solver = ClassicalPortfolioSolver(mu, sigma, risk, budget)
+        c_res = c_solver.solve()
         
-        st.markdown('<div class="control-section">', unsafe_allow_html=True)
-        st.markdown('<div class="control-label">Portfolio Parameters</div>', unsafe_allow_html=True)
-        budget = st.number_input("Assets to Select", 1, len(tickers) if tickers else 4, 2)
-        risk = st.slider("Risk Aversion λ", 0.0, 1.0, 0.5, 0.05)
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.info("Running Quantum Optimization...")
+        qubo = PortfolioOptimizationQUBO(mu, sigma, risk, budget)
+        op, _ = qubo.to_ising()
         
-        st.markdown('<div class="control-section">', unsafe_allow_html=True)
-        st.markdown('<div class="control-label">Quantum Backend</div>', unsafe_allow_html=True)
-        backend_type = st.radio(
-            "Backend Type",
-            ["Simulator", "Real Hardware"],
-            label_visibility="collapsed"
-        )
-        st.markdown('</div>', unsafe_allow_html=True)
+        backend = get_backend(backend_type == "Real HW")
         
-        st.markdown('</div>', unsafe_allow_html=True)
+        # QAOA
+        runner = RawQAOARunner(op, backend)
+        q_res = runner.run()
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        run_solver = st.button("🚀 EXECUTE SOLVER")
-    
-    # Execute solver
-    if run_solver and tickers:
-        st.session_state.status = "running"
+        # Mitigation
+        mitigator = MitigatedExecutor(backend, op)
+        m_res = mitigator.execute(q_res.circuit)
         
-        with st.spinner("Executing quantum optimization..."):
-            # Data fetch
-            df = fetch_stock_data(tickers, config.START_DATE, config.END_DATE)
-            mu, sigma = calculate_covariance_matrix(df)
+        # Results
+        st.success("Done!")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Classical", f"{c_res.value:.4f}")
+            st.metric("Raw QAOA", f"{m_res['raw']:.4f}")
+        with col2:
+            st.metric("ZNE Mitigated", f"{m_res['zne']:.4f}")
             
-            # Classical solver
-            c_solver = ClassicalPortfolioSolver(mu, sigma, risk, budget)
-            c_res = c_solver.solve()
-            
-            # Quantum setup
-            qubo = PortfolioOptimizationQUBO(mu, sigma, risk, budget)
-            op, _ = qubo.to_ising()
-            backend = get_backend(backend_type == "Real Hardware")
-            
-            # QAOA
-            runner = RawQAOARunner(op, backend)
-            q_res = runner.run()
-            
-            # Mitigation
-            mitigator = MitigatedExecutor(backend, op)
-            m_res = mitigator.execute(q_res.circuit)
-            
-            # Store results
-            st.session_state.results = {
-                'classical': c_res,
-                'qaoa': q_res,
-                'mitigated': m_res,
-                'tickers': tickers,
-                'mu': mu,
-                'sigma': sigma
-            }
-            st.session_state.status = "done"
-            st.rerun()
-    
-    # Tab 1: Overview
-    with tab1:
-        if st.session_state.results:
-            results = st.session_state.results
-            c_res = results['classical']
-            m_res = results['mitigated']
-            
-            st.markdown('<div class="category-card">', unsafe_allow_html=True)
-            st.markdown('<h3 style="color: #e8e8e8; margin-bottom: 20px;">Portfolio Summary</h3>', unsafe_allow_html=True)
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">Sharpe Ratio</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="metric-value gain">{c_res.sharpe:.4f}</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            with col2:
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">Expected Return</div>', unsafe_allow_html=True)
-                return_class = "gain" if c_res.ret > 0 else "loss"
-                st.markdown(f'<div class="metric-value {return_class}">{c_res.ret*100:.2f}%</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            with col3:
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">Volatility</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="metric-value" style="color: #e8e8e8;">{c_res.volatility*100:.2f}%</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-            # Selected Assets
-            st.markdown('<div class="category-card">', unsafe_allow_html=True)
-            st.markdown('<h3 style="color: #e8e8e8; margin-bottom: 20px;">Selected Portfolio</h3>', unsafe_allow_html=True)
-            
-            selected_tickers = results['tickers']
-            mu = results['mu']
-            
-            for idx in c_res.indices:
-                ticker = selected_tickers[idx]
-                annual_return = mu[idx] * 100
-                is_gain = annual_return > 0
-                
-                render_asset_item(
-                    ticker,
-                    ticker,
-                    f"{annual_return:.2f}%",
-                    annual_return,
-                    is_gain
-                )
-            
-            st.markdown('</div>', unsafe_allow_html=True)
-        else:
-            st.info("Configure parameters and click EXECUTE SOLVER to begin")
-    
-    # Tab 2: Categories
-    with tab2:
-        if st.session_state.results:
-            results = st.session_state.results
-            selected_tickers = results['tickers']
-            mu = results['mu']
-            sigma = results['sigma']
-            c_res = results['classical']
-            m_res = results['mitigated']
-            
-            # Large Cap - All Assets
-            st.markdown(f"""
-            <div class="category-card">
-                <div class="category-header">
-                    <div class="category-icon">📊</div>
-                    <div style="flex: 1;">
-                        <div class="category-title">Portfolio Assets</div>
-                        <div class="category-subtitle">All available assets by return</div>
-                    </div>
-                    <div class="category-arrow">›</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            # Sort by return
-            asset_data = [(i, selected_tickers[i], mu[i], np.sqrt(sigma[i, i])) 
-                         for i in range(len(selected_tickers))]
-            asset_data_sorted = sorted(asset_data, key=lambda x: x[2], reverse=True)
-            
-            for idx, ticker, ret, vol in asset_data_sorted:
-                annual_return = ret * 100
-                is_gain = annual_return > 0
-                render_asset_item(
-                    ticker,
-                    ticker,
-                    f"{annual_return:.2f}%",
-                    annual_return,
-                    is_gain
-                )
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            # Top Gainers - Quantum Advantage
-            st.markdown(f"""
-            <div class="category-card">
-                <div class="category-header">
-                    <div class="category-icon">🚀</div>
-                    <div style="flex: 1;">
-                        <div class="category-title">Quantum Advantage</div>
-                        <div class="category-subtitle">Assets where quantum beats classical</div>
-                    </div>
-                    <div class="category-arrow">›</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            # Calculate quantum improvement per asset
-            quantum_improvements = []
-            for idx in c_res.indices:
-                ticker = selected_tickers[idx]
-                # Simplified: show ZNE improvement
-                improvement = ((c_res.value - m_res['zne']) / abs(c_res.value)) * 100
-                if improvement > 0:
-                    quantum_improvements.append((idx, ticker, improvement))
-            
-            quantum_improvements_sorted = sorted(quantum_improvements, key=lambda x: x[2], reverse=True)
-            
-            if quantum_improvements_sorted:
-                for idx, ticker, improvement in quantum_improvements_sorted:
-                    render_asset_item(
-                        ticker,
-                        f"{ticker} (Quantum Optimized)",
-                        f"+{improvement:.2f}%",
-                        improvement,
-                        True
-                    )
-            else:
-                st.markdown('<div style="padding: 20px; color: #888;">No quantum advantage detected</div>', unsafe_allow_html=True)
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            # High Volatility
-            st.markdown(f"""
-            <div class="category-card">
-                <div class="category-header">
-                    <div class="category-icon">⚡</div>
-                    <div style="flex: 1;">
-                        <div class="category-title">High Volatility</div>
-                        <div class="category-subtitle">Assets with highest risk</div>
-                    </div>
-                    <div class="category-arrow">›</div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            # Sort by volatility
-            volatility_data = [(i, selected_tickers[i], np.sqrt(sigma[i, i])) 
-                              for i in range(len(selected_tickers))]
-            volatility_sorted = sorted(volatility_data, key=lambda x: x[2], reverse=True)[:5]
-            
-            for idx, ticker, vol in volatility_sorted:
-                vol_pct = vol * 100
-                render_asset_item(
-                    ticker,
-                    ticker,
-                    f"{vol_pct:.2f}%",
-                    vol_pct,
-                    False
-                )
-            
-        else:
-            st.info("Run solver to see asset categories")
-    
-    # Tab 3: Results
-    with tab3:
-        if st.session_state.results:
-            results = st.session_state.results
-            c_res = results['classical']
-            q_res = results['qaoa']
-            m_res = results['mitigated']
-            
-            # Energy comparison
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.plotly_chart(
-                create_comparison_chart(c_res.value, m_res['raw'], m_res['rem'], m_res['zne']),
-                use_container_width=True
-            )
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-            # Convergence
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.plotly_chart(create_energy_chart(q_res.history), use_container_width=True)
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-            # Detailed metrics
-            st.markdown('<div class="category-card">', unsafe_allow_html=True)
-            st.markdown('<h3 style="color: #e8e8e8; margin-bottom: 20px;">Energy Metrics</h3>', unsafe_allow_html=True)
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">Classical Energy</div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="metric-value" style="color: #4d9cff;">{c_res.value:.6f}</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-                
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">Readout Mitigated</div>', unsafe_allow_html=True)
-                rem_better = m_res['rem'] < c_res.value
-                rem_class = "gain" if rem_better else "loss"
-                st.markdown(f'<div class="metric-value {rem_class}">{m_res["rem"]:.6f}</div>', unsafe_allow_html=True)
-                delta = m_res['rem'] - c_res.value
-                delta_class = "gain" if delta < 0 else "loss"
-                st.markdown(f'<div class="metric-delta {delta_class}">{delta:+.6f}</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            with col2:
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">Raw QAOA</div>', unsafe_allow_html=True)
-                raw_better = m_res['raw'] < c_res.value
-                raw_class = "gain" if raw_better else "loss"
-                st.markdown(f'<div class="metric-value {raw_class}">{m_res["raw"]:.6f}</div>', unsafe_allow_html=True)
-                delta = m_res['raw'] - c_res.value
-                delta_class = "gain" if delta < 0 else "loss"
-                st.markdown(f'<div class="metric-delta {delta_class}">{delta:+.6f}</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-                
-                st.markdown('<div class="metric-container">', unsafe_allow_html=True)
-                st.markdown('<div class="metric-label">ZNE Mitigated</div>', unsafe_allow_html=True)
-                zne_better = m_res['zne'] < c_res.value
-                zne_class = "gain" if zne_better else "loss"
-                st.markdown(f'<div class="metric-value {zne_class}">{m_res["zne"]:.6f}</div>', unsafe_allow_html=True)
-                delta = m_res['zne'] - c_res.value
-                delta_class = "gain" if delta < 0 else "loss"
-                st.markdown(f'<div class="metric-delta {delta_class}">{delta:+.6f}</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            st.markdown('</div>', unsafe_allow_html=True)
-            
-            # Results table
-            st.markdown('<div class="category-card">', unsafe_allow_html=True)
-            st.markdown('<h3 style="color: #e8e8e8; margin-bottom: 20px;">Detailed Results</h3>', unsafe_allow_html=True)
-            
-            summary_df = pd.DataFrame({
-                'Method': ['Classical', 'Raw QAOA', 'Readout Mitigation', 'ZNE Mitigation'],
-                'Energy': [c_res.value, m_res['raw'], m_res['rem'], m_res['zne']],
-                'Delta vs Classical': [0.0, 
-                                      m_res['raw'] - c_res.value, 
-                                      m_res['rem'] - c_res.value, 
-                                      m_res['zne'] - c_res.value],
-                'Status': ['Baseline',
-                          '✓ Better' if m_res['raw'] < c_res.value else '✗ Worse',
-                          '✓ Better' if m_res['rem'] < c_res.value else '✗ Worse',
-                          '✓ Better' if m_res['zne'] < c_res.value else '✗ Worse']
-            })
-            
-            st.dataframe(
-                summary_df.style.format({
-                    'Energy': '{:.6f}',
-                    'Delta vs Classical': '{:+.6f}'
-                }),
-                use_container_width=True,
-                hide_index=True
-            )
-            
-            st.markdown('</div>', unsafe_allow_html=True)
-        else:
-            st.info("Run solver to see results")
+        st.plotly_chart(plot_results(c_res.value, m_res['raw'], m_res['rem'], m_res['zne']))
+        st.line_chart(q_res.history)
 
 if __name__ == "__main__":
     main()
-
