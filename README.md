@@ -1,184 +1,124 @@
-OptiQ-Flow
-Quantum Portfolio Optimization with Error Mitigation
-
-Python 3.10+ · Qiskit 1.x · License: MIT
-
-OptiQ-Flow solves portfolio optimization problems on real quantum hardware and demonstrates—quantitatively—that error mitigation makes a measurable difference on noisy quantum devices.
-
+📌 Project Overview
+Field	Description
+Project Name	OptiQ-Flow
+Tagline	Quantum Portfolio Optimization with Error Mitigation
+Domain	Quantum Computing · Finance
+License	MIT
+Python Version	3.10+
+Quantum SDK	Qiskit 1.x
+UI	Streamlit
+Hardware	IBM Quantum (NISQ devices)
 🚀 Overview
-
-Modern portfolio optimization based on Markowitz mean–variance theory scales poorly as the number of assets and constraints increases. While quantum algorithms such as the Quantum Approximate Optimization Algorithm (QAOA) offer a promising path toward quantum advantage in finance, today’s NISQ (Noisy Intermediate-Scale Quantum) hardware suffers from gate and readout noise that significantly degrades solution quality.
-
-OptiQ-Flow tackles this problem directly by combining QAOA with a dual-run error-mitigation architecture, explicitly comparing raw and mitigated quantum results on real IBM Quantum hardware.
-
+Topic	Details
+Core Idea	Solve portfolio optimization using quantum algorithms
+Theory Used	Markowitz Mean–Variance Optimization
+Quantum Algorithm	QAOA (Quantum Approximate Optimization Algorithm)
+Key Challenge	Noise on NISQ quantum hardware
+Solution	Dual-run QAOA with and without error mitigation
+Output	Quantified improvement using financial metrics
 🎯 Problem Statement
-
-Markowitz portfolio optimization is a quadratic optimization problem with super-polynomial scaling.
-
-Classical solvers handle small to medium portfolios well, but struggle with large, constrained universes.
-
-QAOA offers a quantum alternative—but noise destroys accuracy on current hardware.
-
-Most quantum finance demos ignore this reality.
-
-OptiQ-Flow addresses the gap.
-
+Issue	Explanation
+Scaling	Markowitz optimization scales poorly with asset count
+Classical Limitation	Classical solvers struggle with large constrained portfolios
+Quantum Limitation	Noise degrades QAOA accuracy on real hardware
+Research Gap	Most demos ignore hardware noise
+OptiQ-Flow Goal	Measure and mitigate quantum noise impact
 💡 Key Contributions
-
-Formulates the Markowitz mean–variance problem as a QUBO / Ising Hamiltonian
-
-Executes QAOA on real IBM Quantum hardware
-
-Implements a dual-run pipeline:
-
-QAOA without error mitigation
-
-QAOA with error mitigation
-
-Quantifies improvement using Sharpe ratio, accuracy, and convergence
-
-Visualizes results via an interactive Streamlit dashboard
-
+Contribution	Description
+QUBO Mapping	Converts Markowitz problem to QUBO / Ising Hamiltonian
+Real Hardware	Executes QAOA on IBM Quantum devices
+Dual Execution	Runs QAOA with and without error mitigation
+Error Mitigation	Readout calibration and Zero-Noise Extrapolation
+Evaluation	Compares against classical cvxpy baseline
+Visualization	Interactive Streamlit dashboard
 🧠 Solution Architecture
-| Stage | Component                | Description                                                            |
-| ----- | ------------------------ | ---------------------------------------------------------------------- |
-| 1     | Market Data              | Historical or synthetic asset prices from Yahoo Finance                |
-| 2     | Returns & Covariance     | Compute asset returns and covariance matrix                            |
-| 3     | QUBO / Ising Formulation | Map Markowitz mean–variance optimization to QUBO and Ising Hamiltonian |
-| 4     | QAOA (No Mitigation)     | Raw quantum execution with noisy gates and uncorrected readout         |
-| 5     | QAOA + Error Mitigation  | Readout error calibration and Zero-Noise / Richardson extrapolation    |
-| 6     | Comparison & Evaluation  | Compare quantum results against classical baseline (cvxpy)             |
-| 7     | Metrics                  | Sharpe ratio, accuracy, and convergence analysis                       |
-| 8     | Visualization            | Interactive Streamlit dashboard with charts and heatmaps               |
-
-Key Takeaway
-
-| Aspect            | Outcome                                           |
-| ----------------- | ------------------------------------------------- |
-| Dual-run design   | Explicit before/after error mitigation comparison |
-| Hardware focus    | Runs on real NISQ quantum devices                 |
-| Measurable impact | Quantified improvement in optimization accuracy   |
-| Usability         | Clear visualization for analysis and demos        |
-
- 
+Stage	Component	Description
+1	Market Data	Historical or synthetic prices from Yahoo Finance
+2	Returns	Asset return computation
+3	Covariance	Covariance matrix estimation
+4	QUBO Model	Mean–variance mapped to QUBO
+5	Ising Model	QUBO converted to Ising Hamiltonian
+6	QAOA (Raw)	Noisy execution without mitigation
+7	QAOA (Mitigated)	Readout + ZNE applied
+8	Comparison	Classical vs quantum results
+9	Metrics	Sharpe ratio, accuracy, convergence
+10	Visualization	Streamlit charts and heatmaps
+🔑 Key Takeaways
+Aspect	Outcome
+Architecture	Dual-run quantum pipeline
+Hardware	Real NISQ execution
+Impact	Error mitigation improves accuracy
+Evaluation	Quantitative financial metrics
+Usability	Visual and interactive analysis
 🛠 Technology Stack
-| Layer              | Tools                    | Purpose                           |
-| ------------------ | ------------------------ | --------------------------------- |
-| Quantum SDK        | Qiskit 1.x, IBM Runtime  | Circuits, transpilation, hardware |
-| Simulator          | Qiskit Aer               | Noisy & noiseless simulation      |
-| Optimization       | COBYLA, SLSQP            | Classical QAOA optimization       |
-| Classical Baseline | cvxpy                    | Markowitz solver                  |
-| Data               | yfinance, pandas, NumPy  | Market data & statistics          |
-| Visualization      | Plotly, Matplotlib       | Charts & heatmaps                 |
-| Dashboard          | Streamlit                | Interactive UI                    |
-| Error Mitigation   | Readout calibration, ZNE | Noise reduction                   |
-
+Layer	Tools	Purpose
+Quantum SDK	Qiskit 1.x, IBM Runtime	Circuit execution
+Simulator	Qiskit Aer	Noisy & noiseless testing
+Optimizers	COBYLA, SLSQP	QAOA parameter tuning
+Classical Solver	cvxpy	Markowitz baseline
+Data	yfinance, pandas, NumPy	Market data handling
+Visualization	Plotly, Matplotlib	Graphs and heatmaps
+Dashboard	Streamlit	User interface
+Error Mitigation	Readout calibration, ZNE	Noise reduction
 📦 Installation
-git clone https://github.com/your-org/optiq-flow.git
-cd optiq-flow
-
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS / Linux
-source .venv/bin/activate
-
-pip install -r requirements.txt
-
+Step	Command
+Clone Repo	git clone https://github.com/your-org/optiq-flow.git
+Enter Directory	cd optiq-flow
+Create Venv	python -m venv .venv
+Activate (Windows)	.venv\Scripts\activate
+Activate (macOS/Linux)	source .venv/bin/activate
+Install Dependencies	pip install -r requirements.txt
 🔑 IBM Quantum Access
+Item	Value
+File	.env
+Variable	IBM_QUANTUM_TOKEN
+Token Source	https://quantum.ibm.com
 
-Create a .env file in the project root:
-
-IBM_QUANTUM_TOKEN=your_token_here
-
-
-Get a free token from: https://quantum.ibm.com/
-
+Cost	Free
 ⚡ Quick Start (Python API)
-from src.portfolio_data import fetch_stock_data, calculate_returns, compute_covariance_matrix
-from src.qaoa_optimizer import QAOAPortfolioOptimizer
-from src.classical_baseline import classical_markowitz
-
-tickers = ['AAPL', 'GOOGL', 'MSFT', 'TSLA', 'AMZN']
-prices = fetch_stock_data(tickers, '2024-01-01', '2025-12-31')
-returns = calculate_returns(prices)
-cov = compute_covariance_matrix(returns)
-
-classical_weights = classical_markowitz(
-    returns.mean().values, cov.values, risk_aversion=1.0
-)
-
-optimizer = QAOAPortfolioOptimizer(
-    backend_name='aer_simulator',
-    p_layers=2,
-    error_mitigation=True
-)
-
-result = optimizer.optimize(returns.mean().values, cov.values)
-
+Step	Description
+1	Fetch stock price data
+2	Compute returns and covariance
+3	Solve classical Markowitz
+4	Initialize QAOA optimizer
+5	Enable error mitigation
+6	Run quantum optimization
+7	Compare results
 📊 Results
 Method	Sharpe Ratio	Accuracy (%)	Runtime (s)
 Classical (cvxpy)	1.45	100.0	0.5
-QAOA (no mitigation)	1.12	73.2	45.3
-QAOA (with mitigation)	1.38	94.1	52.7
-
-✅ Error mitigation closes ~80% of the gap to the classical optimum.
-
+QAOA (No Mitigation)	1.12	73.2	45.3
+QAOA (With Mitigation)	1.38	94.1	52.7
 🧩 Project Structure
-optiq-flow/
-├── README.md
-├── requirements.txt
-├── config.py
-├── src/
-│   ├── portfolio_data.py
-│   ├── qubo_formulation.py
-│   ├── qaoa_optimizer.py
-│   ├── error_mitigation.py
-│   ├── classical_baseline.py
-│   └── visualization.py
-├── app.py
-├── notebooks/
-│   └── analysis.ipynb
-└── tests/
-    └── test_qaoa.py
-
+Path	Description
+README.md	Documentation
+requirements.txt	Dependencies
+config.py	Global config
+src/portfolio_data.py	Data pipeline
+src/qubo_formulation.py	QUBO construction
+src/qaoa_optimizer.py	QAOA execution
+src/error_mitigation.py	Noise mitigation
+src/classical_baseline.py	Classical solver
+src/visualization.py	Plot utilities
+app.py	Streamlit app
+notebooks/analysis.ipynb	Experiments
+tests/test_qaoa.py	Unit tests
+▶️ How to Run OptiQ-Flow
+Option	Action
+A	Double-click run_optiq.bat
+B	cd optiq_flow && streamlit run app.py
+App Entry	app.py
+Platform	Streamlit
 🔮 Future Extensions
-
-Dynamic portfolio rebalancing
-
-Larger asset universes (IBM Condor, 1000+ qubits)
-
-Advanced ansätze (VQE, ADAPT-QAOA)
-
-Transaction costs & liquidity constraints
-
-Multi-objective optimization (ESG + risk-return)
-
+Area	Extension
+Strategy	Dynamic rebalancing
+Scale	1000+ qubit devices (IBM Condor)
+Algorithms	VQE, ADAPT-QAOA
+Constraints	Transaction costs
+Objectives	ESG + risk-return
 📚 References
-
-Farhi et al., QAOA, arXiv:1411.4028
-
-Markowitz (1952), Portfolio Selection
-
-Temme et al. (2017), Error Mitigation
-
-IBM Qiskit Documentation
-HOW TO RUN OPTIQ-FLOW
-=====================
-
-1. The file is located at:
-   C:\Users\(user)\OneDrive\Desktop\rudra\quantathon\optiq_flow\app.py
-
-2. Your terminal is currently at:
-   C:\Users\(user)
-
-3. To run the app, you must change directory (cd) to the folder where the app is.
-
-OPTION A: Double-click the 'run_optiq.bat' file I created in this folder.
-
-OPTION B: Run this command in your terminal:
-   cd "C:\Users\(USER)\OneDrive\Desktop\(user)\quantathon\optiq_flow"; streamlit run app.py
-
-Good luck!
-
-
+Reference	Description
+Farhi et al.	QAOA (arXiv:1411.4028)
+Markowitz (1952)	Portfolio Selection
+Temme et al. (2017)	Error Mitigation
+IBM Qiskit Docs	Quantum SDK reference
